@@ -1,0 +1,4 @@
+ofxMidi
+ofxOsc
+ofxSyphon
+ofxXmlSettings
