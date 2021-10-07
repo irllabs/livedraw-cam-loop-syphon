@@ -14,6 +14,7 @@
 		1A86B7721CAEBC6F1C572C45 /* ofxBaseMidi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94B3C3C21F92F9310CA90986 /* ofxBaseMidi.cpp */; };
 		1F558B76FB3412843DDAA031 /* ofxSyphonClient.mm in Sources */ = {isa = PBXBuildFile; fileRef = 03EA4DA95B5E1B8409FC058E /* ofxSyphonClient.mm */; };
 		3AEFE4FA8AD5C72671AD07F8 /* ofxRtMidiOut.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 712B183BC00EBFFB1EEA5AB8 /* ofxRtMidiOut.cpp */; };
+		416DD31D270EBCCE00D65AD1 /* OscMapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 416DD31B270EBCCE00D65AD1 /* OscMapper.cpp */; };
 		419FCCD6270C25CF002844AB /* vidLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 419FCCCE270C25CF002844AB /* vidLayer.cpp */; };
 		419FCCD7270C25CF002844AB /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 419FCCCF270C25CF002844AB /* Utils.cpp */; };
 		4ADB88E2FB52E76A471065DE /* ofxOscParameterSync.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0AED834CE4DEC5260AF302A2 /* ofxOscParameterSync.cpp */; };
@@ -79,6 +80,9 @@
 		337B812806A0E7D26A029E5A /* ofxSyphonServerDirectory.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = ofxSyphonServerDirectory.h; path = ../../../addons/ofxSyphon/src/ofxSyphonServerDirectory.h; sourceTree = SOURCE_ROOT; };
 		3B361208CD4107E479F04E7B /* NetworkingUtils.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = NetworkingUtils.cpp; path = ../../../addons/ofxOsc/libs/oscpack/src/ip/posix/NetworkingUtils.cpp; sourceTree = SOURCE_ROOT; };
 		3DD359247F3ED1550D8BB5C9 /* ofxMidiIn.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = ofxMidiIn.cpp; path = ../../../addons/ofxMidi/src/ofxMidiIn.cpp; sourceTree = SOURCE_ROOT; };
+		416DD31A270EBB8F00D65AD1 /* mySettings.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = mySettings.xml; path = bin/data/mySettings.xml; sourceTree = "<group>"; };
+		416DD31B270EBCCE00D65AD1 /* OscMapper.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = OscMapper.cpp; sourceTree = "<group>"; };
+		416DD31E270EC85600D65AD1 /* OscMapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OscMapper.h; sourceTree = "<group>"; };
 		419FCCCD270C25CF002844AB /* ConsoleListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConsoleListener.h; sourceTree = "<group>"; };
 		419FCCCE270C25CF002844AB /* vidLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = vidLayer.cpp; sourceTree = "<group>"; };
 		419FCCCF270C25CF002844AB /* Utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Utils.cpp; sourceTree = "<group>"; };
@@ -875,6 +879,7 @@
 		E4B69B4A0A3A1720003C02F2 = {
 			isa = PBXGroup;
 			children = (
+				416DD31A270EBB8F00D65AD1 /* mySettings.xml */,
 				E4B6FCAD0C3E899E008CF71C /* openFrameworks-Info.plist */,
 				E4EB6923138AFD0F00A09F29 /* Project.xcconfig */,
 				E4B69E1C0A3A1BDC003C02F2 /* src */,
@@ -900,6 +905,8 @@
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
 				E4B69E1E0A3A1BDC003C02F2 /* ofApp.cpp */,
 				E4B69E1F0A3A1BDC003C02F2 /* ofApp.h */,
+				416DD31B270EBCCE00D65AD1 /* OscMapper.cpp */,
+				416DD31E270EC85600D65AD1 /* OscMapper.h */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;
@@ -1026,6 +1033,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
+				416DD31D270EBCCE00D65AD1 /* OscMapper.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* ofApp.cpp in Sources */,
 				63D0FD8734D5760B8080C901 /* RtMidi.cpp in Sources */,
 				419FCCD7270C25CF002844AB /* Utils.cpp in Sources */,

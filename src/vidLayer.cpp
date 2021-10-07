@@ -26,7 +26,7 @@ void vidLayer::setup(int thisID, int bufSize){
     recHead = 0;              //set all playheads to 0
     recCount = 0;             //set all record framecounts to 0
     recMax = bufSize;
-    syphon.setName("livedraw-loop-"+ofToString(myID));
+    syphon.setName(ofToString(myID+1));
     
     // x = THUMB_W * scale * myID +THUMB_W * scale/2;
     //y = THUMB_H * scale + THUMB_H/2;

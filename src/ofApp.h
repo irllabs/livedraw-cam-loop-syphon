@@ -8,6 +8,7 @@
 #include "ConsoleListener.h"
 #include "ofxOsc.h"
 #include "ofxSyphon.h"
+#include "OscMapper.h"
 
 
 
@@ -31,6 +32,7 @@ extern int WINDOW_H;
 //OSC
 extern int OSC_PORT;
 extern int OSC_NUM_MSG_STRINGS;
+extern int MILLUMIN_PORT;
 
 
 class ofApp : public ofBaseApp{
@@ -75,19 +77,11 @@ class ofApp : public ofBaseApp{
     ofxOscReceiver receiver;
     int recordLayerNum;
     int recordLayerState;
+    OscMapper oscMapper;
     
     //Syphon
-    ofTexture syphonTex;
-    
-    ofxSyphonServer syphon1;
-    ofxSyphonServer syphon2;
-    ofxSyphonServer syphon3;
-    ofxSyphonServer syphon4;
-    ofxSyphonServer syphon5;
-    ofxSyphonServer syphon6;
-    ofxSyphonServer syphon7;
+    ofxSyphonServer syphonlive;
 
-    
-    ofxSyphonClient mClient;
+
 
 };

@@ -1,5 +1,5 @@
 //
-//  vidLayer.hpp
+//  vidLayer.h
 //  VideoDelayTest
 //
 //  Created by Ali Momeni on 5/16/17.

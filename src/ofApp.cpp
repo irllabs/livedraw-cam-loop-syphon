@@ -20,10 +20,13 @@ int WINDOW_H;
 //OSC
 int OSC_PORT;
 int OSC_NUM_MSG_STRINGS;
+int MILLUMIN_PORT;
+
 
 //--------------------------------------------------------------
 void ofApp::setup(){
     ofSetLogLevel(OF_LOG_NOTICE);
+    
     //-------------------------------------
     //--XML-settings-----------------------
     //-------------------------------------
@@ -55,6 +58,7 @@ void ofApp::setup(){
     //OSC
     OSC_PORT = XML.getValue("OSC_PORT",12345);
     OSC_NUM_MSG_STRINGS = XML.getValue("OSC_NUM_MSG_STRINGS",20);
+    MILLUMIN_PORT = XML.getValue("MILLUMIN_PORT", 5000);
 
     
     //---------------------------------------
@@ -104,12 +108,14 @@ void ofApp::setup(){
     // listen on the given port
     ofLog() << "listening for osc messages on port " << OSC_PORT;
     receiver.setup(OSC_PORT);
+    oscMapper.setup(MILLUMIN_PORT);
+    
     
     //-------------------------------------------
     //--SETUP Syphon--------------------------------
     //-------------------------------------------
     
-    syphonTex.allocate(CAM_W, CAM_H, GL_RGBA);
+    syphonlive.setName("0");
 }
 
 //--------------------------------------------------------------
@@ -122,24 +128,20 @@ void ofApp::update(){
         // get the next message
         ofxOscMessage m;
         receiver.getNextMessage(m);
-        ofLog() << "something!" << ofToString(m.getAddress());
+        // ofLog() << "something!" << ofToString(m.getAddress());
+        oscMapper.process(m);
         
-        // check for mouse moved message
-        if(m.getAddress().compare(0, 10, "/record/1/") == 0) {
-            // ofLog() << m.getAddress().erase(0,10);
-            recordLayerNum = ofToInt(m.getAddress().erase(0,10)) - 1;
-            // convert 0 / 1 to 2 / 1
-            recordLayerState = !m.getArgAsInt(0) + 1;
-            vidLayers[recordLayerNum].setState(recordLayerState);
-        }
-
-//        if(m.getAddress() == "/record"){
-//
-//            // both the arguments are floats
-//            recordLayerNum = m.getArgAsInt(0);
-//            recordLayerState = m.getArgAsInt(1);
-//            ofLog() << "record: " << ofToString(recordLayerNum) << ofToString(recordLayerState);
+//        // check for mouse moved message
+//        if(m.getAddress().compare(0, 10, "/record/1/") == 0) {
+//            // ofLog() << m.getAddress().erase(0,10);
+//            recordLayerNum = ofToInt(m.getAddress().erase(0,10)) - 1;
+//            // convert 0 / 1 to 2 / 1
+//            recordLayerState = !m.getArgAsInt(0) + 1;
+//            vidLayers[recordLayerNum].setState(recordLayerState);
+//        } else  if(m.getAddress().compare(0, 10, "/Position/x") == 0){
+//            ofLog() << "Position: " << m.getAddress();
 //        }
+
     }
     
     // gate latest camera frame, assign it to a texture
@@ -165,7 +167,10 @@ void ofApp::draw(){
 
     //nowTexture.draw(0,0,CAM_W * VID_SCALE,CAM_H * VID_SCALE);
     nowTexture.draw(0,0,THUMB_W, float(CAM_H) / float(CAM_W) * float(THUMB_W));
-
+    
+    //publish texture to syphon
+    syphonlive.publishTexture(&nowTexture);
+    
     //itereate through all recording buffers
     
     if (LAYER_DRAW == 1) {
