@@ -15,7 +15,7 @@
 		1F558B76FB3412843DDAA031 /* ofxSyphonClient.mm in Sources */ = {isa = PBXBuildFile; fileRef = 03EA4DA95B5E1B8409FC058E /* ofxSyphonClient.mm */; };
 		3AEFE4FA8AD5C72671AD07F8 /* ofxRtMidiOut.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 712B183BC00EBFFB1EEA5AB8 /* ofxRtMidiOut.cpp */; };
 		416DD31D270EBCCE00D65AD1 /* OscMapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 416DD31B270EBCCE00D65AD1 /* OscMapper.cpp */; };
-		419FCCD6270C25CF002844AB /* vidLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 419FCCCE270C25CF002844AB /* vidLayer.cpp */; };
+		419FCCD6270C25CF002844AB /* VidLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 419FCCCE270C25CF002844AB /* VidLayer.cpp */; };
 		419FCCD7270C25CF002844AB /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 419FCCCF270C25CF002844AB /* Utils.cpp */; };
 		4ADB88E2FB52E76A471065DE /* ofxOscParameterSync.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0AED834CE4DEC5260AF302A2 /* ofxOscParameterSync.cpp */; };
 		4D508D34156E7076531D9084 /* Syphon.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D58DCB2C0AEFDE6171E29540 /* Syphon.framework */; };
@@ -84,9 +84,9 @@
 		416DD31B270EBCCE00D65AD1 /* OscMapper.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = OscMapper.cpp; sourceTree = "<group>"; };
 		416DD31E270EC85600D65AD1 /* OscMapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OscMapper.h; sourceTree = "<group>"; };
 		419FCCCD270C25CF002844AB /* ConsoleListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConsoleListener.h; sourceTree = "<group>"; };
-		419FCCCE270C25CF002844AB /* vidLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = vidLayer.cpp; sourceTree = "<group>"; };
+		419FCCCE270C25CF002844AB /* VidLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VidLayer.cpp; sourceTree = "<group>"; };
 		419FCCCF270C25CF002844AB /* Utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Utils.cpp; sourceTree = "<group>"; };
-		419FCCD0270C25CF002844AB /* vidLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vidLayer.h; sourceTree = "<group>"; };
+		419FCCD0270C25CF002844AB /* VidLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VidLayer.h; sourceTree = "<group>"; };
 		419FCCD1270C25CF002844AB /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
 		419FCCD2270C25CF002844AB /* Consts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Consts.h; sourceTree = "<group>"; };
 		419FCCD3270C25CF002844AB /* ofApp copy.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "ofApp copy.cpp"; sourceTree = "<group>"; };
@@ -900,8 +900,8 @@
 				419FCCD5270C25CF002844AB /* ofApp copy.h */,
 				419FCCCF270C25CF002844AB /* Utils.cpp */,
 				419FCCD1270C25CF002844AB /* Utils.h */,
-				419FCCCE270C25CF002844AB /* vidLayer.cpp */,
-				419FCCD0270C25CF002844AB /* vidLayer.h */,
+				419FCCCE270C25CF002844AB /* VidLayer.cpp */,
+				419FCCD0270C25CF002844AB /* VidLayer.h */,
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
 				E4B69E1E0A3A1BDC003C02F2 /* ofApp.cpp */,
 				E4B69E1F0A3A1BDC003C02F2 /* ofApp.h */,
@@ -1049,7 +1049,7 @@
 				ADE367465D2A8EBAD4C7A8D9 /* IpEndpointName.cpp in Sources */,
 				67FE4C7B15C2F0478C8126C2 /* NetworkingUtils.cpp in Sources */,
 				510CAFE035E576A4E1502D52 /* UdpSocket.cpp in Sources */,
-				419FCCD6270C25CF002844AB /* vidLayer.cpp in Sources */,
+				419FCCD6270C25CF002844AB /* VidLayer.cpp in Sources */,
 				62545D179C94265CA1389D4A /* OscOutboundPacketStream.cpp in Sources */,
 				C4782ECC372420ACE0615B74 /* OscPrintReceivedElements.cpp in Sources */,
 				0546D1A38E13BD319CC9755B /* OscReceivedElements.cpp in Sources */,

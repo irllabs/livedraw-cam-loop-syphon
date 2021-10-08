@@ -2,7 +2,7 @@
 
 #include "ofMain.h"
 //#include "ofxMidi.h"
-#include "vidLayer.h"
+#include "VidLayer.h"
 #include "Utils.h"
 #include "ofxXmlSettings.h"
 #include "ConsoleListener.h"
@@ -33,7 +33,8 @@ extern int WINDOW_H;
 extern int OSC_PORT;
 extern int OSC_NUM_MSG_STRINGS;
 extern int MILLUMIN_PORT;
-
+extern int MILLUMIN_WIDTH;
+extern int MILLUMIN_HEIGHT;
 
 class ofApp : public ofBaseApp{
 
@@ -67,7 +68,7 @@ class ofApp : public ofBaseApp{
     
     
     // Video layers
-    vector < vidLayer > vidLayers;
+    vector < VidLayer > vidLayers;
     ofVideoGrabber videoGrabber;
     
     //XML settings related

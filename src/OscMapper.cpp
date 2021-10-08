@@ -5,24 +5,37 @@
 //  Created by Ali Momeni on 10/6/21.
 //
 
+#include "ofApp.h"
 #include "OscMapper.h"
 
-void OscMapper::setup(int port) {
+void OscMapper::setup(int port, vector<VidLayer> &layers) {
+//void OscMapper::setup(int port) {
     // open an outgoing connection to HOST:PORT
-
+    vidLayers = &layers;
+    ofLog() << "Setting up OSC Sender for target 127.0.0.1 port " << ofToString(port);
     sender.setup("127.0.0.1", port);
 }
 
 void OscMapper::process(ofxOscMessage msg) {
     string address;
     ofxOscMessage m;
+    float posOut[2];
+    string argString;
+    // Logging incoming messages
+    for (int i = 0; i < msg.getNumArgs();i++) {
+        argString = argString + " " + ofToString(msg.getArgAsFloat(i));
+    }
+    ofLog() << "OSC Received: " << msg.getAddress() << " " << argString;
+    
+    
     if(msg.getAddress().compare(0, POS_X.length(), POS_X) == 0) {
         for(int i = 0; i < 8; i++){
-            if (msg.getArgAsFloat(i) != posy[i] ) {
+            if (msg.getArgAsFloat(i) != posx[i] ) {
                 posx[i] = msg.getArgAsFloat(i);
                 // send it out over OSC to Millumin
-                address = LAYER_PREFIX + "/" + ofToString(i) + POSITION_OUT;
-                float args[2] = {posx[i],posy[i]};
+                float args[2] = {mapX(posx[i]),mapY(posy[i])};
+                string address = LAYER_PREFIX + ofToString(i) + POSITION_OUT;
+                ofLog() << "pos x: " << ofToString(address) << " " << ofToString(mapX(posx[i])) << " " << ofToString(mapY(posy[i]));
                 send(address, args);
             }
         }
@@ -32,9 +45,10 @@ void OscMapper::process(ofxOscMessage msg) {
             if (msg.getArgAsFloat(i) != posy[i] ) {
                 posy[i] = msg.getArgAsFloat(i);
                 // send it out over OSC to Millumin
-                float args[2] = {posx[i],posy[i]};
-                send(LAYER_PREFIX + "/" + ofToString(i) + POSITION_OUT,
-                     args);
+                float args[2] = {mapX(posx[i]),mapY(posy[i])};
+                string address = LAYER_PREFIX + ofToString(i) + POSITION_OUT;
+                ofLog() << "pos y: " << ofToString(address) << " " << ofToString(mapX(posx[i])) << " " << ofToString(mapY(posy[i]));
+                send(address, args);
             }
         }
     } else
@@ -43,7 +57,7 @@ void OscMapper::process(ofxOscMessage msg) {
             if (msg.getArgAsFloat(i) != opacity[i] ) {
                 opacity[i] = msg.getArgAsFloat(i);
                 float args[1] = {opacity[i]};
-                send(LAYER_PREFIX + "/" + ofToString(i) + OPACITY_OUT,
+                send(LAYER_PREFIX + ofToString(i) + OPACITY_OUT,
                      args);
             }
         }
@@ -53,13 +67,35 @@ void OscMapper::process(ofxOscMessage msg) {
             if (msg.getArgAsFloat(i) != scale[i] ) {
                 scale[i] = msg.getArgAsFloat(i);
                 ofxOscMessage m;
-                float args[1] = {scale[i]};
-                send(LAYER_PREFIX + "/" + ofToString(i) + SCALE_OUT,
+                float args[1] = {ofMap(scale[i],0.,1.,0.,4.)};
+                send(LAYER_PREFIX + ofToString(i) + SCALE_OUT,
                      args);
             }
         }
+    } else
+    if(msg.getAddress().compare(0, STATE.length(), STATE) == 0) {
+        int layerNumber = ofToInt(msg.getAddress().erase(0,7));
+        
+        int newState = (msg.getArgAsInt(0) * 1 + msg.getArgAsInt(1) * 2 + msg.getArgAsInt(2) * 3) - 1;
+        ofLog() << "layer/state : " << ofToString(layerNumber) << " " << ofToString(newState);
+        if (newState != (*vidLayers)[layerNumber].getState() ) {
+            ofLog() << "setting : " << ofToString(layerNumber) << " " << ofToString(newState);
+            (*vidLayers)[layerNumber].setState(newState);
+            // set state of video layer
+        }
+        
     }
     
+}
+
+float OscMapper::mapX(float x) {
+    float xScaled = ofMap(x, 0., 1., -1. * float(MILLUMIN_WIDTH) / 2., float(MILLUMIN_WIDTH) / 2.);
+    return xScaled;
+}
+
+float OscMapper::mapY(float y) {
+    float yScaled = ofMap(y, 0., 1., -1. * float(MILLUMIN_HEIGHT) / 2., float(MILLUMIN_HEIGHT) / 2.);
+    return yScaled;
 }
 
 void OscMapper::send(string address, float args[]) {

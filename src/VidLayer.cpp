@@ -7,12 +7,12 @@
 //
 
 #include "ofApp.h"
-#include "vidLayer.h"
+#include "VidLayer.h"
 
 // #include "Consts.h"
 
 
-void vidLayer::setup(int thisID, int bufSize){
+void VidLayer::setup(int thisID, int bufSize){
     //array of textures
     //vidFrames.resize(bufSize);
     
@@ -20,7 +20,7 @@ void vidLayer::setup(int thisID, int bufSize){
     vidFrames.resize(bufSize);
     
     myID = thisID;
-    state = 0;                //stop all playheads
+    state = 0;                //stop all playheads; 0 = stop, 1 = record, 2 = play
     playHead = 0;             //set all playheads to 0
     playDir = 1;              // 1 for forward, -1 for reverse
     recHead = 0;              //set all playheads to 0
@@ -43,7 +43,7 @@ void vidLayer::setup(int thisID, int bufSize){
     }
 }
 
-void vidLayer::draw(ofTexture thisTexture){
+void VidLayer::draw(ofTexture thisTexture){
     if (state==2 && recCount>0) {
         //while playing the recording:
 
@@ -60,8 +60,10 @@ void vidLayer::draw(ofTexture thisTexture){
     }
 }
 
-void vidLayer::update(ofTexture theTexture){
-    if (state == 1) {
+void VidLayer::update(ofTexture theTexture){
+    if (state == 0) {
+        // stop
+    } else if (state == 1) {
         //ofLog(OF_LOG_NOTICE, "recording update2 " + ofToString(myID)+ " at "+ ofToString(recHead));
         
         //draw texture onto FBO
@@ -78,12 +80,15 @@ void vidLayer::update(ofTexture theTexture){
     }
 }
 
-void vidLayer::setState(int thisState){
+void VidLayer::setState(int thisState){
     //if we're not already recording, start recording
     
     switch (thisState) {
         //stop
         case 0:
+            if (state != thisState) {
+                state=0;            //set state to 1
+            }
         //record
         case 1:
             if (state != thisState) {
@@ -104,10 +109,10 @@ void vidLayer::setState(int thisState){
     
 }
 
-int vidLayer::getState() {
+int VidLayer::getState() {
     return(state);
 }
 
-void vidLayer::setSpeed(float speed){
+void VidLayer::setSpeed(float speed){
     
 }
