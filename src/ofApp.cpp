@@ -21,6 +21,8 @@ int WINDOW_H;
 int OSC_PORT;
 int OSC_NUM_MSG_STRINGS;
 int MILLUMIN_PORT;
+int MILLUMIN_WIDTH;
+int MILLUMIN_HEIGHT;
 
 
 //--------------------------------------------------------------
@@ -37,18 +39,14 @@ void ofApp::setup(){
     //render window
     WINDOW_W = XML.getValue("WINDOW_W", 0);
     WINDOW_H = XML.getValue("WINDOW_H", 0);
-    
-
     CAM_DEV_ID = XML.getValue("CAM_DEV_ID", 0);
     CAM_W = XML.getValue("CAM_W", 0);
     CAM_H = XML.getValue("CAM_H", 0);
     CAM_FPS = XML.getValue("CAM_FPS", 30);
     VID_SCALE = float(WINDOW_W) / float(CAM_W);
     ofLog(OF_LOG_NOTICE, "VID_SCALE is: " + ofToString(WINDOW_W) + " divided by " + ofToString(CAM_W) + " so: " + ofToString(VID_SCALE));
-
     THUMB_W = XML.getValue("THUMB_W", 0);
     THUMB_H = XML.getValue("THUMB_H", 0);
-    
     
     //recording layers
     LAYER_COUNT = XML.getValue("LAYER_COUNT", 0);
@@ -59,8 +57,8 @@ void ofApp::setup(){
     OSC_PORT = XML.getValue("OSC_PORT",12345);
     OSC_NUM_MSG_STRINGS = XML.getValue("OSC_NUM_MSG_STRINGS",20);
     MILLUMIN_PORT = XML.getValue("MILLUMIN_PORT", 5000);
-
-    
+    MILLUMIN_WIDTH = XML.getValue("MILLUMIN_WIDTH", 1920);
+    MILLUMIN_HEIGHT = XML.getValue("MILLUMIN_HEIGHT", 1080);
     //---------------------------------------
     //--SETUP CAMERA-------------------------
     //---------------------------------------
@@ -108,8 +106,9 @@ void ofApp::setup(){
     // listen on the given port
     ofLog() << "listening for osc messages on port " << OSC_PORT;
     receiver.setup(OSC_PORT);
-    oscMapper.setup(MILLUMIN_PORT);
-    
+    oscMapper.setup(MILLUMIN_PORT, vidLayers);
+    //oscMapper.setup(MILLUMIN_PORT);
+
     
     //-------------------------------------------
     //--SETUP Syphon--------------------------------

@@ -19,6 +19,9 @@
 <MILLUMIN_PORT>5000</MILLUMIN_PORT>
 <OSC_NUM_MSG_STRINGS>20</OSC_NUM_MSG_STRINGS>
 
+<MILLUMIN_WIDTH>2048</MILLUMIN_WIDTH>
+<MILLUMIN_HEIGHT>768</MILLUMIN_HEIGHT>
+
 <!-- This is set up for a Novation LaunchControl XL-->
 
 <!-- recording buttons produce notes; they are not contiguous so they're listed one by one-->

@@ -6,14 +6,14 @@
 //
 //
 
-#ifndef vidLayer_hpp
-#define vidLayer_hpp
+#ifndef VidLayer_hpp
+#define VidLayer_hpp
 
 #include <stdio.h>
 #include "ofMain.h"
 #include "ofxSyphon.h"
 
-class vidLayer{
+class VidLayer{
 public:
     //frames of video
     //array of textures
