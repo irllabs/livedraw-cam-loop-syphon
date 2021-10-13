@@ -75,7 +75,7 @@ void ofApp::setup(){
              ofLogNotice() << devices[i].id << ": " << devices[i].deviceName << " - unavailable ";
          }
     }
-    
+    ofLog(OF_LOG_NOTICE,"Selecting device: " + ofToString(CAM_DEV_ID));
      videoGrabber.setDeviceID(CAM_DEV_ID);
      videoGrabber.setDesiredFrameRate(CAM_FPS);
      videoGrabber.initGrabber(CAM_W, CAM_H);
@@ -114,7 +114,7 @@ void ofApp::setup(){
     //--SETUP Syphon--------------------------------
     //-------------------------------------------
     
-    syphonlive.setName("0");
+    // syphonlive.setName("0");
 }
 
 //--------------------------------------------------------------
@@ -130,17 +130,6 @@ void ofApp::update(){
         // ofLog() << "something!" << ofToString(m.getAddress());
         oscMapper.process(m);
         
-//        // check for mouse moved message
-//        if(m.getAddress().compare(0, 10, "/record/1/") == 0) {
-//            // ofLog() << m.getAddress().erase(0,10);
-//            recordLayerNum = ofToInt(m.getAddress().erase(0,10)) - 1;
-//            // convert 0 / 1 to 2 / 1
-//            recordLayerState = !m.getArgAsInt(0) + 1;
-//            vidLayers[recordLayerNum].setState(recordLayerState);
-//        } else  if(m.getAddress().compare(0, 10, "/Position/x") == 0){
-//            ofLog() << "Position: " << m.getAddress();
-//        }
-
     }
     
     // gate latest camera frame, assign it to a texture
@@ -167,8 +156,6 @@ void ofApp::draw(){
     //nowTexture.draw(0,0,CAM_W * VID_SCALE,CAM_H * VID_SCALE);
     nowTexture.draw(0,0,THUMB_W, float(CAM_H) / float(CAM_W) * float(THUMB_W));
     
-    //publish texture to syphon
-    syphonlive.publishTexture(&nowTexture);
     
     //itereate through all recording buffers
     

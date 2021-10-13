@@ -26,12 +26,12 @@ void VidLayer::setup(int thisID, int bufSize){
     recHead = 0;              //set all playheads to 0
     recCount = 0;             //set all record framecounts to 0
     recMax = bufSize;
-    syphon.setName(ofToString(myID+1));
+    syphon.setName(ofToString(myID));
     
     // x = THUMB_W * scale * myID +THUMB_W * scale/2;
     //y = THUMB_H * scale + THUMB_H/2;
 
-    x = THUMB_W * (myID + 1);
+    x = THUMB_W * (myID+1);
     y = 0;
     //x = WINDOW_W/2;
     //y = WINDOW_H/2;
@@ -51,8 +51,8 @@ void VidLayer::draw(ofTexture thisTexture){
         vidFrames[playHead].draw(x, y , THUMB_W, float(CAM_H) / float(CAM_W) * float(THUMB_W));
         syphon.publishTexture(&vidFrames[playHead].getTexture());
     
-    } else if (state == 1) {
-        //while recording, draw live feed
+    } else if (state == 1 || state == 3) {
+        //while recording or "thru", draw live feed
         ofTexture livefeed;
         livefeed = thisTexture;
         livefeed.draw(x, y , THUMB_W, float(CAM_H) / float(CAM_W) * float(THUMB_W));
@@ -66,10 +66,11 @@ void VidLayer::update(ofTexture theTexture){
     } else if (state == 1) {
         //ofLog(OF_LOG_NOTICE, "recording update2 " + ofToString(myID)+ " at "+ ofToString(recHead));
         
-        //draw texture onto FBO
+        //draw texture onto FBO to record current frame
         vidFrames[recHead].begin();
         theTexture.draw(0,0);
         vidFrames[recHead].end();
+        
         //advance record head
         recHead = (recHead + 1 ) % recMax;
     } else if (state == 2) {
@@ -77,7 +78,10 @@ void VidLayer::update(ofTexture theTexture){
         playHead = (playHead + playDir * 1);
         if (playHead >= recCount ) {playDir = -1; playHead = recCount - 1;}
         if (playHead <= 0 ) {playDir = 1; playHead = 0;}
+    } else if (state == 3) {
+        //do nothing
     }
+    
 }
 
 void VidLayer::setState(int thisState){
@@ -87,23 +91,31 @@ void VidLayer::setState(int thisState){
         //stop
         case 0:
             if (state != thisState) {
+                //ofLog(OF_LOG_NOTICE, "STOP on layer " + ofToString(myID));
+
                 state=0;            //set state to 1
             }
         //record
         case 1:
             if (state != thisState) {
+                //ofLog(OF_LOG_NOTICE, "RECORD on layer " + ofToString(myID));
                 state=1;            //set state to 1
                 recHead = 0;        //reset record head
             }
         //play
         case 2:
             if (state != thisState) {
-                ofLog(OF_LOG_NOTICE, "PLAY: State for layer " + ofToString(myID) + " is " + ofToString(state));
-                ofLog(OF_LOG_NOTICE, "Starting playing on layer " + ofToString(myID));
+                //ofLog(OF_LOG_NOTICE, "PLAY on layer " + ofToString(myID));
                 state=2;
                 recCount = recHead;     //set record frame count to last frame recorded
                 playHead = recCount - 1;           //set playhead to 0
                 playDir = -1;
+            }
+        //thru
+        case 3:
+            //ofLog(OF_LOG_NOTICE, "THRU on layer " + ofToString(myID));
+            if (state != thisState) {
+                state = 3;
             }
     }
     
