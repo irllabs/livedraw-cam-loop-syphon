@@ -74,7 +74,7 @@ void OscMapper::process(ofxOscMessage msg) {
         }
     } else
     if(msg.getAddress().compare(0, STATE.length(), STATE) == 0) {
-        int layerNumber = ofToInt(msg.getAddress().erase(0,7));
+        int layerNumber = ofToInt(msg.getAddress().erase(0,7))-1; // -1 cuz vidLayer array starts with 0
         
         int newState = (msg.getArgAsInt(0) * 1 + msg.getArgAsInt(1) * 2 + msg.getArgAsInt(2) * 3 + msg.getArgAsInt(3) * 4) - 1;
         //ofLog() << "layer/state : " << ofToString(layerNumber) << " " << ofToString(newState);

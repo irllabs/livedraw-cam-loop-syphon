@@ -27,6 +27,7 @@ void VidLayer::setup(int thisID, int bufSize){
     recCount = 0;             //set all record framecounts to 0
     recMax = bufSize;
     syphon.setName(ofToString(myID+1));
+    blackFrame.allocate(CAM_W, CAM_H);
     
     // x = THUMB_W * scale * myID +THUMB_W * scale/2;
     //y = THUMB_H * scale + THUMB_H/2;
@@ -57,6 +58,8 @@ void VidLayer::draw(ofTexture thisTexture){
         livefeed = thisTexture;
         livefeed.draw(x, y , THUMB_W, float(CAM_H) / float(CAM_W) * float(THUMB_W));
         syphon.publishTexture(&livefeed);
+    } else if (state == 0) {
+        syphon.publishTexture(&blackFrame.getTexture());
     }
 }
 

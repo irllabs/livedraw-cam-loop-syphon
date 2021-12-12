@@ -21,6 +21,7 @@ public:
     
     //array of FBOs
     vector <ofFbo> vidFrames;
+    ofFbo blackFrame;
     
     //properties
     int x;
