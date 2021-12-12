@@ -19,14 +19,14 @@ void VidLayer::setup(int thisID, int bufSize){
     //array of FBOs
     vidFrames.resize(bufSize);
     
-    myID = thisID;
+    myID = thisID;            //Starts with 0; same as array of vidLayers index; but syphon name uses the more logical start-with-1
     state = 0;                //stop all playheads; 0 = stop, 1 = record, 2 = play
     playHead = 0;             //set all playheads to 0
     playDir = 1;              // 1 for forward, -1 for reverse
     recHead = 0;              //set all playheads to 0
     recCount = 0;             //set all record framecounts to 0
     recMax = bufSize;
-    syphon.setName(ofToString(myID));
+    syphon.setName(ofToString(myID+1));
     
     // x = THUMB_W * scale * myID +THUMB_W * scale/2;
     //y = THUMB_H * scale + THUMB_H/2;

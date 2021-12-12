@@ -83,7 +83,7 @@ void OscMapper::process(ofxOscMessage msg) {
             (*vidLayers)[layerNumber].setState(newState);
             // set state of video layer
         }
-    }
+    } 
 }
 
 float OscMapper::mapX(float x) {

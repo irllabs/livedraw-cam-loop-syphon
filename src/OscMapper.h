@@ -24,6 +24,16 @@ class OscMapper{
         const string STATE = "/State";
         const string SCALE = "/Scale/x";
         const string OPACITY = "/Opacity/x";
+        const string EFFECT = "/effect";
+        const string KEY1_ENABLED = "/effect1/enabled";
+        const string KEY1_SENSITIVITY = "/effect1/sensitivity";
+        const string KEY1_SMOOTHING = "/effect1/smoothing";
+        const string KEY1_REMOVESPILL = "/effect1/removespill";
+        const string KEY2_ENABLED = "/effect2/enabled";
+        const string KEY2_SENSITIVITY = "/effect2/sensitivity";
+        const string KEY2_SMOOTHING = "/effect2/smoothing";
+        const string KEY2_REMOVESPILL = "/effect2/removespill";
+    
         
         // OSC address to Millumin
         const string LAYER_PREFIX = "/Layer";
